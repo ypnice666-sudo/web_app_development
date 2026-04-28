@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">{{ action }}</h4>
+            </div>
+            <div class="card-body p-4">
+                <!-- 共用表單：包含新增與編輯，送出到當前的 URL (POST) -->
+                <form method="POST">
+                    <div class="mb-4">
+                        <label for="title" class="form-label fw-bold">任務標題 <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="title" name="title" value="{{ task.get('title', '') }}" placeholder="例如：明天早上 9 點開會" required autofocus>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="description" class="form-label fw-bold">詳細說明</label>
+                        <textarea class="form-control" id="description" name="description" rows="4" placeholder="補充一些開會需要準備的資料...">{{ task.get('description', '') }}</textarea>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="due_date" class="form-label fw-bold">預計完成時間 <span class="text-muted fw-normal">(選填)</span></label>
+                        <input type="date" class="form-control" id="due_date" name="due_date" value="{{ task.get('due_date', '') }}">
+                    </div>
+                    
+                    <div class="d-flex justify-content-between mt-5">
+                        <a href="{{ url_for('task.index') }}" class="btn btn-outline-secondary px-4">取消</a>
+                        <button type="submit" class="btn btn-primary px-4">儲存任務</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
